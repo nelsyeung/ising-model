@@ -84,7 +84,7 @@ function calcSpins() {
 				left = spins.length - 1;
 			}
 
-			var M = prevSpins[i][top] + prevSpins[right][j] + prevSpins[i][bottom] + prevSpins[left][j] / 4;
+			var M = prevSpins[i][top] + prevSpins[right][j] + prevSpins[i][bottom] + prevSpins[left][j];
 			var B_eff = J * M + B;
 			var tmp = Math.exp(B_eff / T);
 			var pUp = tmp / (tmp + Math.pow(tmp, -1));
@@ -107,7 +107,7 @@ function calcSpins() {
 function startSim() {
 	startBtn.disabled = true;
 	stopBtn.disabled = false;
-	simulation = setInterval(function() { calcSpins(); }, 1000);
+	simulation = setInterval(function() { calcSpins(); }, 500);
 }
 
 function stopSim() {
