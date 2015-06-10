@@ -9,21 +9,38 @@
 
 <body>
 	<div id="main-wrapper">
-		<canvas id="canvas" width="500" height="500">
-		</canvas><!--
+		<canvas id="canvas" width="600" height="600">
+		</canvas>
+		<!--
 
-		--><div id="controls">
-			<label class="electrons-label">Electrons per row</label><br>
-			<input id="num-electrons-input" type="range" min="2" max="50" oninput="changeNumElectrons()" onchange="initSpins(); drawCanvas();"><br>
-			<div id="num-electrons-label"></div><br>
-			<label>J:</label><input id="J" type="number" value="0" min="0"><br>
-			<label>B:</label><input id="B" type="number" value="0" min="0"><br>
-			<label>T:</label><input id="T" type="number" value="0" min="0"><br>
+		-->
+		<div id="controls">
+			<label class="electrons-label">Electrons per row</label>
+			<br>
+			<input id="num-electrons-input" type="range" min="2" max="100" oninput="changeNumElectrons()" onchange="initSpins(); drawCanvas();">
+			<br>
+			<div id="num-electrons-label"></div>
+			<br>
+			<label class="small-label">J =</label>
+			<input id="J" type="number" value="1" min="0" step="0.1">
+			<br>
+			<label class="small-label">B =</label>
+			<input id="B" type="number" value="0" min="0" step="0.1">
+			<br>
+			<label class="small-label">T =</label>
+			<input id="T" type="number" value="1" min="0" step="0.1">
+			<br>
+			<label>Time interval (s)</label><br>
+			<input id="time-interval" type="number" value="0.1" min="0.01" step="0.01">
+			<br>
 			<button id="start-btn" onclick="startSim()">Start</button>
-			<button id="stop-btn" disabled onclick="stopSim()">Stop</button>
+			<button id="stop-btn" disabled onclick="stopSim()">Stop</button><br>
+			<button id="reset-btn" onclick="initSpins(); drawCanvas();">Reset</button><br><br>
+			<label class="small-label">M = </label><span id="total-spin"></span><br>
+			<label class="small-label">P = </label><span id="polarisation"></span>
 		</div>
 	</div>
 
-	<script src="script.js"></script>
+	<script src="main.js"></script>
 </body>
 </html>
