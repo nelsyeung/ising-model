@@ -13,8 +13,14 @@ function calcSpins(J, B, T, prevSpins) {
 
 			M = prevSpins[i][top] + prevSpins[right][j] + prevSpins[i][bottom] + prevSpins[left][j];
 			B_eff = J * M + B;
-			tmp = Math.exp(B_eff / T);
-			P_up = tmp / (tmp + Math.pow(tmp, -1));
+
+      if (T === 0) {
+        P_up = 1;
+      }
+      else {
+        tmp = Math.exp(B_eff / T);
+        P_up = tmp / (tmp + Math.pow(tmp, -1));
+      }
 
 			if (Math.floor(Math.random() + P_up) >= 1) {
 				spins[i][j] = 1;
@@ -29,7 +35,7 @@ function calcSpins(J, B, T, prevSpins) {
 	postMessage([
 		spins,
 		Math.abs(totalSpin), // M
-		(Math.abs(totalSpin) / (spins.length * spins.length)).toFixed(5) // P
+		Math.abs(totalSpin) / (spins.length * spins.length) // P
 	]);
 }
 

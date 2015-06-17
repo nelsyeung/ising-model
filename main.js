@@ -51,7 +51,7 @@ function drawCanvas() {
 				if (spins[i][j] === -1) {
 					ctx.fillStyle = '#000';
 				} else {
-					ctx.fillStyle = '#DDD';
+					ctx.fillStyle = '#FFF';
 				}
 
 				ctx.fillRect(i * (size + padding), j * (size + padding), size, size);
@@ -64,17 +64,17 @@ function simulate() {
 	if (window.Worker) {
 		if (typeof(simWorker) !== 'undefined') {
 			simWorker.postMessage([
-					document.getElementById('J').value,
-					document.getElementById('B').value,
-					document.getElementById('T').value,
+					Number(document.getElementById('J').value),
+					Number(document.getElementById('B').value),
+					Number(document.getElementById('T').value),
 					spins
 			]);
 
 			simWorker.onmessage = function(e) {
 				spins = e.data[0];
 				drawCanvas();
-				totalSpinEl.innerHTML = e.data[1];
-				polarisationEl.innerHTML = e.data[2];
+				totalSpinEl.innerHTML = e.data[1].toString();
+				polarisationEl.innerHTML = e.data[2].toFixed(5);
 				setTimeout(simulate, document.getElementById('time-interval').value * 1000);
 			};
 		}
@@ -90,6 +90,7 @@ function startSim() {
 
 	if (typeof(simWorker) === 'undefined') {
 		simWorker = new Worker('worker.js');
+		// simWorker = new Worker('http://s.codepen.io/nelsyeung/pen/RPgoOL.js');
 	}
 
 	simulate();
